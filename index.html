@@ -92,6 +92,33 @@ nav a{background:#ffffffc9;backdrop-filter:blur(10px);padding:8px 13px;border-ra
 .cake-wrap{text-align:center}
 .cake{font-size:115px;cursor:pointer;display:inline-block;filter:drop-shadow(0 10px 10px #0002);transition:.2s}
 .cake:hover{transform:scale(1.06) rotate(-2deg)}
+.wish-reveal{
+  max-width:420px;margin:24px auto 0;padding:16px;
+  background:#fff;border:1px solid #fff;border-radius:24px;
+  box-shadow:var(--shadow);opacity:0;transform:translateY(12px) scale(.98);
+  transition:opacity .55s ease,transform .55s ease;
+}
+.wish-reveal.show{opacity:1;transform:translateY(0) scale(1)}
+.wish-reveal[hidden]{display:none}
+.wish-photo{
+  display:block;width:100%;max-height:420px;object-fit:cover;
+  aspect-ratio:4/5;border-radius:16px;border:6px solid #fff7fb;
+  animation:wishPhotoBob 3.6s ease-in-out infinite;
+  will-change:transform;
+}
+@keyframes wishPhotoBob{
+  0%,100%{transform:translateY(0) rotate(-0.5deg)}
+  50%{transform:translateY(-8px) rotate(0.5deg)}
+}
+@media (prefers-reduced-motion:reduce){
+  .wish-photo{animation:none}
+}
+.wish-title{font-family:Pacifico,cursive;color:var(--pink);font-size:25px;margin:14px 0 8px}
+.wish-message{line-height:1.8;margin:0;font-size:14px}
+@media(max-width:700px){
+  .wish-reveal{margin:20px auto 0;padding:13px}
+  .wish-photo{max-height:360px}
+}
 .hint{font-size:13px;opacity:.65}
 .final{text-align:center;padding:70px 20px 30px}
 .final h2{font-family:Pacifico,cursive;color:var(--pink);font-size:45px;font-weight:400}
@@ -278,9 +305,14 @@ footer{text-align:center;opacity:.55;font-size:12px;padding:20px}
       <p>Klik kuenya. Iya, kuenya.</p>
     </div>
     <div class="cake-wrap">
-      <div class="cake" onclick="birthday()">🎂</div>
+      <div class="cake" onclick="birthday()" role="button" tabindex="0" aria-label="Buka kejutan ulang tahun">🎂</div>
       <p class="hint">tap / click the cake</p>
-      <h3 id="wish" style="min-height:28px"></h3>
+      <div class="wish-reveal" id="wishReveal" hidden>
+        <img class="wish-photo" src="foto7.jpg" alt="Foto kejutan untuk Ola">
+        <h3 class="wish-title">A little wish for you ♡</h3>
+        <p class="wish-message">✨ Semoga sehat selalu, panjang umur, diberikan kemudahan dan kekuatan, sholehah, dan makin cantik selalu yaaa. btw cepi apa kabarnya? ini kamu lucu bgt pas waktu itu ✨</p>
+      </div>
+      <h3 id="wish" style="min-height:8px;margin:0"></h3>
     </div>
   </section>
 
@@ -376,9 +408,24 @@ function confetti(amount=45){
 
 /* Birthday cake */
 function birthday(){
-  document.getElementById("wish").textContent="✨ Wish unlocked: semoga sehat selalu, panjang umur, diberikan kemudahan, di berikan kekuatan, sholehah, dan makin cantik selalu yaaa. ✨";
+  const reveal = document.getElementById("wishReveal");
+  const photo = reveal.querySelector(".wish-photo");
+  reveal.hidden = false;
+  requestAnimationFrame(() => reveal.classList.add("show"));
+  document.getElementById("wish").textContent = "";
+  photo.onerror = () => {
+    photo.alt = "Upload foto bernama wish-photo.jpg ke folder utama website";
+    photo.style.display = "none";
+  };
   confetti(65);
 }
+
+document.querySelector(".cake").addEventListener("keydown", event => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    birthday();
+  }
+});
 
 /* Escape untuk modal */
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closePhoto()});
