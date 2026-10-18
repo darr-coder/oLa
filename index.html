@@ -74,18 +74,55 @@ nav a{background:#ffffffc9;backdrop-filter:blur(10px);padding:8px 13px;border-ra
   box-shadow:var(--shadow)
 }
 .scrapbook{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.note{background:#fff7b8;transform:rotate(-1deg);padding:30px;border-radius:4px;box-shadow:0 12px 25px #00000012}
-.note:nth-child(2){background:#ffddeb;transform:rotate(1.5deg)}
-.note:nth-child(3){background:#dff6ec;transform:rotate(-1.3deg)}
+.note{
+  background:#fff7b8;
+  transform:rotate(var(--note-rotation, -1deg));
+  padding:30px;
+  border-radius:4px;
+  box-shadow:0 12px 25px #00000012;
+  animation:noteBob 4.8s ease-in-out infinite;
+  will-change:transform;
+  backface-visibility:hidden;
+}
+.note:nth-child(2){background:#ffddeb;--note-rotation:1.5deg;animation-delay:-1.6s}
+.note:nth-child(3){background:#dff6ec;--note-rotation:-1.3deg;animation-delay:-3.2s}
+.note:nth-child(1){--note-rotation:-1deg}
 .note h3{margin-top:0}.note p{line-height:1.8}
+
+/* Bobbing pelan dan halus, dengan jeda berbeda untuk tiap kartu */
+@keyframes noteBob{
+  0%,100%{transform:translate3d(0,0,0) rotate(var(--note-rotation))}
+  50%{transform:translate3d(0,-7px,0) rotate(var(--note-rotation))}
+}
+@media (prefers-reduced-motion:reduce){
+  .note,.note:nth-child(2),.note:nth-child(3){animation:none;will-change:auto}
+}
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+/* Foto dan caption ikut mengambang pelan, dengan ritme berbeda */
+.gallery > div{
+  animation:galleryPhotoBob 5.2s ease-in-out infinite;
+  will-change:transform;
+  backface-visibility:hidden;
+}
+.gallery > div:nth-child(2){animation-delay:-.85s}
+.gallery > div:nth-child(3){animation-delay:-1.7s}
+.gallery > div:nth-child(4){animation-delay:-2.6s}
+.gallery > div:nth-child(5){animation-delay:-3.5s}
+.gallery > div:nth-child(6){animation-delay:-4.35s}
+@keyframes galleryPhotoBob{
+  0%,100%{transform:translate3d(0,0,0)}
+  50%{transform:translate3d(0,-5px,0)}
+}
 .photo{
   aspect-ratio:1/1;overflow:hidden;border-radius:16px;background:#f2e9ed;
-  border:9px solid #fff;box-shadow:0 12px 25px #00000012;cursor:pointer;transition:.25s
+  border:9px solid #fff;box-shadow:0 12px 25px #00000012;cursor:pointer;transition:transform .25s
 }
 .photo:hover{transform:rotate(2deg) scale(1.025)}
 .photo img{width:100%;height:100%;object-fit:cover;display:block}
 .caption{text-align:center;font-size:13px;margin-top:8px}
+@media (prefers-reduced-motion:reduce){
+  .gallery > div{animation:none;will-change:auto}
+}
 .letter{max-width:760px;margin:auto;line-height:2;font-size:16px}
 .letter p{margin:0 0 18px}
 .highlight{color:var(--pink);font-weight:700}
@@ -286,14 +323,14 @@ footer{text-align:center;opacity:.55;font-size:12px;padding:20px}
 
     </div>
     <div class="scrapbook">
-      <div class="note"><h3>🌷 Pertama...</h3>
-        <p>Happy Birthday, <b class="name">NAMA</b>! Semoga hari ini menyenangkan dan dipenuhi hal-hal kecil yang selalu bikin kamu senyum.</p>
+      <div class="note"><h3>🌷 first of all...</h3>
+        <p>Happy Birthday, <b class="name">NAMA</b>! i hope life gives you more reasons to smile, even on the most random days. You deserve the kind of happiness that comes naturally, without having to look too hard for it.</p>
       </div>
-      <div class="note"><h3>☁️ Semoga...</h3>
-        <p>Semoga apa pun yang sedang kamu perjuangkan sekarang bisa berjalan dengan baik. Jangan terlalu keras sama diri sendiri.</p>
+      <div class="note"><h3>☁️ No Rush, Okay?</h3>
+        <p>You don't have to figure everything out right away. Just take your time, do things at your own pace, and give yourself a little credit. You're doing better than you think.</p>
       </div>
       <div class="note"><h3>🧸 last one...</h3>
-        <p>Semoga hal-hal baik selalu menemukan jalannya ke hidupmu. Semoga hari-harimu dipenuhi kebahagiaan dan keceriaan, banyak alasan untuk tersenyum bahagia, dan hal-hal kecil yang bikin kamu bersyukur sampai saat ini.</p>
+        <p>You might not always see it yourself, but the little things that make you who you are can mean a lot more to someone than you realize. And I think that's pretty special.</p>
       </div>
     </div>
   </section>
@@ -304,12 +341,12 @@ footer{text-align:center;opacity:.55;font-size:12px;padding:20px}
       <h2>Photo corner 📸</h2>
       </div>
     <div class="gallery">
-      <div><div class="photo" onclick="openPhoto('foto1.jpg')"><img src="foto1.jpg" alt="Foto 1"></div><div class="caption">“The kindest girl in the world”</div></div>
-      <div><div class="photo" onclick="openPhoto('foto2.jpg')"><img src="foto2.jpg" alt="Foto 2"></div><div class="caption">“The most mature girl in the world”</div></div>
-      <div><div class="photo" onclick="openPhoto('foto3.jpg')"><img src="foto3.jpg" alt="Foto 3"></div><div class="caption">“The most patient girl in the world”</div></div>
-      <div><div class="photo" onclick="openPhoto('foto4.jpg')"><img src="foto4.jpg" alt="Foto 4"></div><div class="caption">“The cutest girl in the world”</div></div>
-      <div><div class="photo" onclick="openPhoto('foto5.jpg')"><img src="foto5.jpg" alt="Foto 5"></div><div class="caption">“The most loyal girl in the world”</div></div>
-      <div><div class="photo" onclick="openPhoto('foto6.jpg')"><img src="foto6.jpg" alt="Foto 6"></div><div class="caption">“The most beautiful girl in the world”</div></div>
+      <div><div class="photo" onclick="openPhoto('foto1.jpg')"><img src="foto1.jpg" alt="Foto 1"></div><div class="caption">“Got the kindest heart ever.”</div></div>
+      <div><div class="photo" onclick="openPhoto('foto2.jpg')"><img src="foto2.jpg" alt="Foto 2"></div><div class="caption">“Honestly, she’s so mature.”</div></div>
+      <div><div class="photo" onclick="openPhoto('foto3.jpg')"><img src="foto3.jpg" alt="Foto 3"></div><div class="caption">“Her patience is something else.”</div></div>
+      <div><div class="photo" onclick="openPhoto('foto4.jpg')"><img src="foto4.jpg" alt="Foto 4"></div><div class="caption">“How can someone be this cute?”</div></div>
+      <div><div class="photo" onclick="openPhoto('foto5.jpg')"><img src="foto5.jpg" alt="Foto 5"></div><div class="caption">“She’s loyal like no other.”</div></div>
+      <div><div class="photo" onclick="openPhoto('foto6.jpg')"><img src="foto6.jpg" alt="Foto 6"></div><div class="caption">“Simply the prettiest girl.”</div></div>
     </div>
   </section>
 
