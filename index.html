@@ -178,18 +178,64 @@ footer{text-align:center;opacity:.55;font-size:12px;padding:20px}
 }
 
 
-/* Pastikan seluruh bagian penutup rata tengah di layar HP */
+/* Rapikan perataan teks di layar HP */
 @media (max-width:700px) {
+  /* Semua judul dan teks utama berada di tengah */
+  .intro-card,
+  .hero,
+  .hero-inner,
+  .section-title,
+  .section-title h2,
+  .section-title p,
+  .note,
+  .note h3,
+  .note p,
+  .caption,
+  .cake-wrap,
+  .wish-reveal,
+  .wish-title,
+  .wish-message,
   .final,
   .final .script,
   .final h2,
-  .final p {
+  .final p,
+  footer {
     text-align: center !important;
   }
+
+  /* Isi surat juga rata tengah dan tetap nyaman dibaca di HP */
+  .letter,
+  .letter p {
+    text-align: center !important;
+  }
+
+  .letter {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .letter p[style*="text-align:right"] {
+    text-align: center !important;
+  }
+
   .final .btn {
     display: inline-block;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .section-title p,
+  .hero p,
+  .note p,
+  .letter p,
+  .wish-message,
+  .final p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .wish-reveal {
+    width: 100%;
   }
 }
 
@@ -225,9 +271,9 @@ footer{text-align:center;opacity:.55;font-size:12px;padding:20px}
       <div class="kicker">A little birthday website for</div>
       <h1><span id="name1">NAMA</span><br>is getting older! 🎂</h1>
       <p>
-        Selamat ulang tahun, <b id="name2">NAMA</b>!<br>
-        Semoga tahun ini banyak hal seru yang bisa kamu temuin, banyak hal yang bikin bahagia.
-        dan semoga apa yang lagi kamu usahain bisa berjalan sesuai harapan. Have a good one! 🥳
+        Happy Birthday, <b id="name2">NAMA</b>!<br>
+        guess who's the birthday girl?
+        yep, it's you. today is all yours! 🎂
       </p>
       <button class="btn" onclick="document.querySelector('#words').scrollIntoView()">Ada sesuatu ↓</button>
     </div>
@@ -241,12 +287,12 @@ footer{text-align:center;opacity:.55;font-size:12px;padding:20px}
     </div>
     <div class="scrapbook">
       <div class="note"><h3>🌷 Pertama...</h3>
-        <p>Selamat ulang tahun, <b class="name">NAMA</b>! Semoga hari ini menyenangkan dan dipenuhi hal-hal kecil yang selalu bikin kamu senyum.</p>
+        <p>Happy Birthday, <b class="name">NAMA</b>! Semoga hari ini menyenangkan dan dipenuhi hal-hal kecil yang selalu bikin kamu senyum.</p>
       </div>
       <div class="note"><h3>☁️ Semoga...</h3>
         <p>Semoga apa pun yang sedang kamu perjuangkan sekarang bisa berjalan dengan baik. Jangan terlalu keras sama diri sendiri.</p>
       </div>
-      <div class="note"><h3>🧸 Oh iya...</h3>
+      <div class="note"><h3>🧸 last one...</h3>
         <p>Semoga hal-hal baik selalu menemukan jalannya ke hidupmu. Semoga hari-harimu dipenuhi kebahagiaan dan keceriaan, banyak alasan untuk tersenyum bahagia, dan hal-hal kecil yang bikin kamu bersyukur sampai saat ini.</p>
       </div>
     </div>
@@ -338,7 +384,7 @@ footer{text-align:center;opacity:.55;font-size:12px;padding:20px}
    ✏️ BAGIAN YANG PALING MUDAH DIGANTI
    ========================================================== */
 const CONFIG = {
-  nama: "LALAA",
+  nama: "LALA",
   tanggal: "24 April 2027"
 };
 
