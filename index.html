@@ -184,6 +184,62 @@ nav a{background:#ffffffc9;backdrop-filter:blur(10px);padding:8px 13px;border-ra
 .hint{font-size:13px;opacity:.65}
 .final{text-align:center;padding:70px 20px 30px}
 .final h2{font-family:Pacifico,cursive;color:var(--pink);font-size:45px;font-weight:400}
+ .final-note{
+  width:min(100%,520px);margin:30px auto 24px;padding:25px 20px 28px;
+  border:1px solid #fff;border-radius:28px;
+  background:linear-gradient(150deg,rgba(255,255,255,.98),rgba(255,239,246,.98));
+  box-shadow:0 20px 55px rgba(86,52,70,.13);
+  opacity:0;transform:translateY(24px) scale(.94);
+  position:relative;overflow:hidden;isolation:isolate;
+}
+.final-note.show{animation:finalCardReveal .8s cubic-bezier(.16,1,.3,1) both}
+.final-note[hidden]{display:none}
+.final-note::before,.final-note::after{content:"♡";position:absolute;z-index:-1;color:#ffb5cc;font-size:25px;opacity:0;pointer-events:none}
+.final-note.show::before{top:18px;left:18px;animation:finalHeartIn .7s .5s ease-out forwards,finalHeart 3.8s 1.2s ease-in-out infinite}
+.final-note.show::after{right:18px;bottom:18px;animation:finalHeartIn .7s .7s ease-out forwards,finalHeart 3.8s 1.4s ease-in-out infinite}
+.final-note-kicker{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#b77b92;font-weight:700;margin:2px 0 13px;opacity:0;transform:translateY(8px)}
+.final-note.show .final-note-kicker{animation:finalTextIn .65s .25s ease-out forwards}
+.final-envelope-wrap{height:190px;display:grid;place-items:center;margin:5px auto 15px;perspective:900px}
+.final-envelope{position:relative;width:190px;height:125px;border:0;background:transparent;cursor:pointer;filter:drop-shadow(0 12px 14px #9e60751c);transform:translateY(18px) scale(.75) rotate(-5deg);opacity:0}
+.final-note.show .final-envelope{animation:envelopeArrive .85s .12s cubic-bezier(.16,1,.3,1) forwards, envelopeFloat 3.6s 1.05s ease-in-out infinite}
+.envelope-back{position:absolute;inset:0;background:#f3b7cb;border-radius:8px;overflow:hidden}
+.envelope-paper{position:absolute;z-index:1;left:13px;right:13px;top:7px;height:104px;background:#fffafc;border-radius:5px;box-shadow:0 2px 7px #7b43511c;transform:translateY(0);transition:transform .7s cubic-bezier(.2,.8,.2,1);display:grid;place-items:center;color:#c47b97;font-size:25px}
+.envelope-front{position:absolute;inset:0;z-index:2;background:#ffd7e4;clip-path:polygon(0 0,50% 57%,100% 0,100% 100%,0 100%);border-radius:8px;}
+.envelope-flap{position:absolute;inset:0;background:#f8c3d4;clip-path:polygon(0 0,100% 0,50% 76%);transform-origin:top;transition:transform .65s cubic-bezier(.2,.8,.2,1);z-index:3}
+.envelope-seal{position:absolute;z-index:4;left:50%;top:57%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#fff6fa;color:#c16c8c;box-shadow:0 3px 9px #9e607533;font-size:17px;transition:opacity .25s}
+.final-envelope.open .envelope-flap{transform:rotateX(180deg)}
+.final-envelope.open .envelope-paper{transform:translateY(-48px);transition-delay:.15s}
+.final-envelope.open .envelope-seal{opacity:0}
+.final-envelope-hint{margin:-3px 0 0;font-size:12px;color:#b77b92;opacity:0}
+.final-note.show .final-envelope-hint{animation:finalTextIn .5s .75s forwards}
+.final-note h3{font-family:Pacifico,cursive;color:var(--pink);font-size:27px;font-weight:400;margin:8px 0 14px;opacity:0;transform:translateY(12px)}
+.final-letter-content.show h3{animation:finalTextIn .7s .08s ease-out forwards}
+.final-note-message{max-width:390px;margin:0 auto;line-height:1.9;font-size:15px;opacity:0;transform:translateY(10px)}
+.final-letter-content.show .final-note-message{animation:finalTextIn .7s .22s ease-out forwards}
+.final-signature{margin:20px 0 0;color:#b87591;font-family:Pacifico,cursive;font-size:17px;opacity:0;transform:translateY(8px)}
+.final-letter-content.show .final-signature{animation:finalTextIn .7s .42s ease-out forwards}
+.final-action-opening{animation:buttonAnticipate .55s ease-in-out}
+.final-letter-content[hidden],.final-extra-message[hidden]{display:none}
+.final-letter-content{margin:8px auto 0;padding:20px 17px 18px;border-radius:20px;background:rgba(255,255,255,.72);border:1px solid #f5dce6;animation:finalCardReveal .7s cubic-bezier(.16,1,.3,1) both}
+.final-letter-content.show h3{animation:finalTextIn .6s .08s ease-out both}
+.final-letter-content.show .final-note-message{animation:finalTextIn .7s .22s ease-out both}
+.final-letter-content.show .final-signature{animation:finalTextIn .7s .42s ease-out both}
+.final-letter-rule{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#bc8298;margin-bottom:10px}
+.final-extra-button{margin-top:19px;border:1px solid #edc4d4;background:#fff7fa;color:#b66f8b;padding:10px 15px;border-radius:999px;font:inherit;font-size:12px;cursor:pointer;transition:transform .2s,background .2s}
+.final-extra-button:hover{transform:translateY(-2px);background:#ffeaf2}
+.final-extra-message{margin:15px auto 0;max-width:360px;padding:14px;border-radius:14px;background:#fff0f6;color:#a45e7b;line-height:1.8;font-size:14px;animation:finalCardReveal .65s ease-out both}
+.final-envelope.open{animation:envelopeOpened .5s ease-out}
+@keyframes envelopeOpened{0%{transform:scale(1)}45%{transform:scale(1.09) rotate(-3deg)}100%{transform:scale(1) rotate(0)}}
+
+@keyframes finalCardReveal{0%{opacity:0;filter:blur(7px);transform:translateY(24px) scale(.94)}70%{opacity:1;filter:blur(0);transform:translateY(-4px) scale(1.01)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes envelopeArrive{0%{opacity:0;filter:blur(5px);transform:translateY(35px) scale(.55) rotate(-12deg)}65%{opacity:1;filter:blur(0);transform:translateY(-7px) scale(1.06) rotate(4deg)}100%{opacity:1;transform:translateY(0) scale(1) rotate(0)}}
+@keyframes envelopeFloat{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -5px;rotate:1deg}}
+@keyframes finalTextIn{to{opacity:1;transform:translateY(0)}}
+@keyframes finalHeartIn{0%{opacity:0;transform:scale(.2) rotate(-25deg)}70%{opacity:.9;transform:scale(1.3) rotate(10deg)}100%{opacity:.75;transform:scale(1) rotate(0)}}
+@keyframes finalHeart{0%,100%{translate:0 0;rotate:-10deg}50%{translate:0 -7px;rotate:10deg}}
+@keyframes buttonAnticipate{0%,100%{transform:scale(1)}35%{transform:scale(.94)}70%{transform:scale(1.04)}}
+@media(max-width:480px){.final-note{padding:22px 15px 24px}.final-envelope-wrap{height:170px}.final-envelope{transform:scale(.9)}}
+@media(prefers-reduced-motion:reduce){.final-note,.final-envelope,.final-note::before,.final-note::after,.final-note-kicker,.final-note h3,.final-note-message,.final-signature,.final-action-opening{animation:none!important;transition:none!important;opacity:1;filter:none;transform:none}.final-envelope-hint{opacity:1}.final-letter-content,.final-extra-message{animation:none!important;opacity:1;transform:none}}
 footer{text-align:center;opacity:.55;font-size:12px;padding:20px}
 .confetti{position:fixed;top:-20px;z-index:999;font-size:20px;pointer-events:none;animation:fall 2.7s linear forwards}
 @keyframes fall{to{transform:translateY(110vh) rotate(700deg);opacity:0}}
@@ -203,6 +259,17 @@ footer{text-align:center;opacity:.55;font-size:12px;padding:20px}
   nav a { padding:9px 12px; font-size:12px; }
   .hero { min-height:unset; padding:58px 0 52px; }
   .hero-inner { width:100%; min-width:0; }
+  /* Di HP, pembuka dibuat bertahap agar tombol benar-benar terasa seperti kejutan */
+  .hero:not(.revealed) .hero-second-line,
+  .hero:not(.revealed) > .hero-inner > p { display:none; }
+  .hero:not(.revealed) { padding-top:72px; padding-bottom:70px; }
+  .hero:not(.revealed) h1 { margin-bottom:26px; }
+  .hero.revealed .hero-second-line { animation: heroTextIn .65s ease both; }
+  .hero.revealed .hero-inner > p { animation: heroTextIn .8s .12s ease both; }
+  @keyframes heroTextIn {
+    from { opacity:0; transform:translateY(12px); }
+    to { opacity:1; transform:translateY(0); }
+  }
   .kicker { font-size:10px; letter-spacing:2px; line-height:1.7; }
   .hero h1 { font-size:clamp(39px, 10.5vw, 58px); line-height:1.04; margin:12px 0 18px; overflow-wrap:anywhere; }
   .hero h1 span { letter-spacing:-1px; }
@@ -331,13 +398,13 @@ footer{text-align:center;opacity:.55;font-size:12px;padding:20px}
         <span class="float f3">🎀</span><span class="float f4">💗</span>
       </div>
       <div class="kicker">A little birthday website for</div>
-      <h1><span id="name1">NAMA</span><br>is getting older! 🎂</h1>
+      <h1><span id="name1">NAMA</span><br><span class="hero-second-line">is getting older! 🎂</span></h1>
       <p>
         Happy Birthday, <b id="name2">NAMA</b>!<br>
         guess who's the birthday girl?
         yep, it's you. today is all yours! 🎂
       </p>
-      <button class="btn" onclick="document.querySelector('#words').scrollIntoView()">Ada sesuatu ↓</button>
+      <button class="btn" id="heroAction" onclick="heroSurprise()">Ada sesuatu ↓</button>
     </div>
   </section>
 
@@ -429,7 +496,27 @@ footer{text-align:center;opacity:.55;font-size:12px;padding:20px}
     <div class="script">that's all!</div>
     <h2>Happy Birthday, <span class="name">NAMA</span>! 🎀</h2>
     <p>Semoga hari ini jadi salah satu hari yang kamu ingat dengan senyum.</p>
-    <button class="btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">🔄 Mulai dari awal</button>
+    <div class="final-note" id="finalNote" hidden aria-live="polite">
+      <div class="final-note-kicker">a final letter to you ♡</div>
+      <div class="final-envelope-wrap">
+        <button class="final-envelope" id="finalEnvelope" type="button" onclick="openEnvelope()" aria-label="Buka surat terakhir">
+          <span class="envelope-back"></span><span class="envelope-paper">♡</span>
+          <span class="envelope-front"></span><span class="envelope-flap"></span><span class="envelope-seal">♡</span>
+        </button>
+      </div>
+      <p class="final-envelope-hint" id="envelopeHint">tap the little envelope ♡</p>
+      <div class="final-letter-content" id="finalLetterContent" hidden>
+        <div class="final-letter-rule">a little note, just for you</div>
+        <h3>One last thing, Lala ♡</h3>
+        <p class="final-note-message">Thank you for being someone who has taught me so much about life—sometimes without you even realizing it.<br><br>
+I know we don’t always see things the same way, and there may be many matters on which we will never fully agree. Yet, in a way, those very differences have taught me things I might never have learned had I not known you. You’ve helped me see things from different perspectives, understand matters more deeply, and realize that people don’t need to share the same mindset for their presence to be meaningful.<br><br>
+So, thank you for being a part of my life, in your own unique way. I am truly grateful to have known you, and I hope life brings you all the happiness you so richly deserve.</p>
+        <p class="final-signature">— from darr</p>
+        <button class="final-extra-button" id="finalExtraButton" type="button" onclick="revealFinalExtra()">there's one more thing</button>
+        <p class="final-extra-message" id="finalExtraMessage" hidden>Whatever happens in your life, please don’t give up—I know you’re strong. tetap semangat yaa ♡</p>
+      </div>
+    </div>
+    <button class="btn" id="finalAction" onclick="openFinalNote()">Satu hal lagi, Lala ♡</button>
   </section>
 
   <footer>Made with too much effort & a little bit of nostalgia. ✨</footer>
@@ -466,6 +553,81 @@ document.querySelectorAll(".name").forEach(el => el.textContent = CONFIG.nama);
 document.getElementById("name1").textContent = CONFIG.nama;
 document.getElementById("name2").textContent = CONFIG.nama;
 document.getElementById("introName").textContent = CONFIG.nama;
+
+/* Tombol pembuka hero: di HP buka ucapan dulu, klik berikutnya baru menuju pesan */
+function heroSurprise(){
+  const hero = document.querySelector(".hero");
+  const button = document.getElementById("heroAction");
+  const isMobile = window.matchMedia("(max-width: 700px)").matches;
+
+  if (isMobile && !hero.classList.contains("revealed")) {
+    hero.classList.add("revealed");
+    button.textContent = "Lanjut yuk ↓";
+    confetti(18);
+    return;
+  }
+
+  document.querySelector("#words").scrollIntoView({ behavior: "smooth" });
+}
+
+/* Pesan terakhir di bagian penutup */
+function openFinalNote(){
+  const note = document.getElementById("finalNote");
+  const button = document.getElementById("finalAction");
+  if (note.hidden) {
+    button.classList.remove("final-action-opening");
+    void button.offsetWidth;
+    button.classList.add("final-action-opening");
+    button.disabled = true;
+    button.textContent = "bentar ya, ada satu hal lagi... ♡";
+    setTimeout(() => {
+      note.hidden = false;
+      note.classList.remove("show");
+      void note.offsetWidth;
+      requestAnimationFrame(() => note.classList.add("show"));
+      button.disabled = false;
+      button.textContent = "Makasih udah baca ♡";
+      button.onclick = () => {
+        const envelope = document.getElementById("finalEnvelope");
+        if (!envelope.classList.contains("open")) openEnvelope();
+        else window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+      confetti(22);
+      setTimeout(() => note.scrollIntoView({ behavior: "smooth", block: "center" }), 180);
+    }, 420);
+  } else {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
+function openEnvelope(){
+  const envelope = document.getElementById("finalEnvelope");
+  const hint = document.getElementById("envelopeHint");
+  const content = document.getElementById("finalLetterContent");
+  if (!envelope.classList.contains("open")) {
+    envelope.classList.add("open");
+    hint.textContent = "the letter is waiting for you... ♡";
+    confetti(12);
+    setTimeout(() => {
+      content.hidden = false;
+      content.classList.remove("show");
+      void content.offsetWidth;
+      content.classList.add("show");
+      setTimeout(() => content.scrollIntoView({behavior:"smooth",block:"nearest"}), 180);
+    }, 650);
+  }
+}
+
+function revealFinalExtra(){
+  const message = document.getElementById("finalExtraMessage");
+  const button = document.getElementById("finalExtraButton");
+  if (message.hidden) {
+    message.hidden = false;
+    button.textContent = "that's all, promise ♡";
+    button.disabled = true;
+    confetti(8);
+  }
+}
 
 /* Opening */
 function startSite(){
