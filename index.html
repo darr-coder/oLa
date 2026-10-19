@@ -115,10 +115,35 @@ nav a{background:#ffffffc9;backdrop-filter:blur(10px);padding:8px 13px;border-ra
 }
 .photo{
   aspect-ratio:1/1;overflow:hidden;border-radius:16px;background:#f2e9ed;
-  border:9px solid #fff;box-shadow:0 12px 25px #00000012;cursor:pointer;transition:transform .25s
+  border:9px solid #fff;box-shadow:0 12px 25px #00000012;cursor:pointer;transition:transform .25s;
+  position:relative;
 }
 .photo:hover{transform:rotate(2deg) scale(1.025)}
 .photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo::after{
+  content:"tap for a little message ♡";position:absolute;inset:auto 0 0;
+  padding:10px 5px;color:#fff;text-align:center;font-size:11px;font-weight:700;
+  background:linear-gradient(transparent,rgba(55,35,48,.72));opacity:0;transition:opacity .25s;
+}
+.photo:hover::after,.photo:focus-visible::after{opacity:1}
+.photo:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+.message-modal{position:fixed;inset:0;z-index:950;display:none;place-items:center;padding:20px;
+  background:rgba(45,32,40,.58);backdrop-filter:blur(7px)}
+.message-modal.show{display:grid;animation:messageFade .25s ease}
+.message-card{position:relative;width:min(100%,420px);max-height:90vh;overflow-y:auto;
+  padding:16px 18px 24px;text-align:center;
+  background:linear-gradient(145deg,#fffaf5,#fff0f6);border:1px solid #fff;border-radius:26px;
+  box-shadow:0 24px 70px #2d202833;animation:messagePop .35s cubic-bezier(.2,.8,.2,1)}
+.message-photo{display:block;width:100%;max-height:42vh;aspect-ratio:4/3;object-fit:cover;
+  border-radius:17px;border:5px solid #fff;margin:0 auto 15px;box-shadow:0 8px 22px #46343d18}
+.message-card .message-emoji{font-size:30px;margin-bottom:5px}
+.message-card h3{font-family:Pacifico,cursive;color:var(--pink);font-weight:400;font-size:25px;margin:4px 0 12px}
+.message-card p{line-height:1.85;margin:0;font-size:15px}
+.message-card .message-close{position:absolute;right:12px;top:12px;width:34px;height:34px;border:0;
+  border-radius:50%;background:#fff;color:var(--ink);font-size:21px;cursor:pointer}
+@keyframes messageFade{from{opacity:0}to{opacity:1}}
+@keyframes messagePop{from{opacity:0;transform:translateY(12px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.message-modal.show,.message-card{animation:none}}
 .caption{text-align:center;font-size:13px;margin-top:8px}
 @media (prefers-reduced-motion:reduce){
   .gallery > div{animation:none;will-change:auto}
@@ -339,14 +364,15 @@ footer{text-align:center;opacity:.55;font-size:12px;padding:20px}
     <div class="section-title">
       <div class="script">little memories</div>
       <h2>Photo corner 📸</h2>
+      <h3>Click the photo!</h3>
       </div>
     <div class="gallery">
-      <div><div class="photo" onclick="openPhoto('foto1.jpg')"><img src="foto1.jpg" alt="Foto 1"></div><div class="caption">“Got the kindest heart ever.”</div></div>
-      <div><div class="photo" onclick="openPhoto('foto2.jpg')"><img src="foto2.jpg" alt="Foto 2"></div><div class="caption">“Honestly, she’s so mature.”</div></div>
-      <div><div class="photo" onclick="openPhoto('foto3.jpg')"><img src="foto3.jpg" alt="Foto 3"></div><div class="caption">“Her patience is something else.”</div></div>
-      <div><div class="photo" onclick="openPhoto('foto4.jpg')"><img src="foto4.jpg" alt="Foto 4"></div><div class="caption">“How can someone be this cute?”</div></div>
-      <div><div class="photo" onclick="openPhoto('foto5.jpg')"><img src="foto5.jpg" alt="Foto 5"></div><div class="caption">“She’s loyal like no other.”</div></div>
-      <div><div class="photo" onclick="openPhoto('foto6.jpg')"><img src="foto6.jpg" alt="Foto 6"></div><div class="caption">“Simply the prettiest girl.”</div></div>
+      <div><div class="photo" role="button" tabindex="0" aria-label="Buka pesan foto 1" onclick="openPhotoMessage(0)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPhotoMessage(0)}"><img src="foto1.jpg" alt="Foto 1"></div><div class="caption">“Got the kindest heart ever.”</div></div>
+      <div><div class="photo" role="button" tabindex="0" aria-label="Buka pesan foto 2" onclick="openPhotoMessage(1)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPhotoMessage(1)}"><img src="foto2.jpg" alt="Foto 2"></div><div class="caption">“Honestly, she’s so mature.”</div></div>
+      <div><div class="photo" role="button" tabindex="0" aria-label="Buka pesan foto 3" onclick="openPhotoMessage(2)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPhotoMessage(2)}"><img src="foto3.jpg" alt="Foto 3"></div><div class="caption">“Her patience is something else.”</div></div>
+      <div><div class="photo" role="button" tabindex="0" aria-label="Buka pesan foto 4" onclick="openPhotoMessage(3)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPhotoMessage(3)}"><img src="foto4.jpg" alt="Foto 4"></div><div class="caption">“How can someone be this cute?”</div></div>
+      <div><div class="photo" role="button" tabindex="0" aria-label="Buka pesan foto 5" onclick="openPhotoMessage(4)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPhotoMessage(4)}"><img src="foto5.jpg" alt="Foto 5"></div><div class="caption">“She’s loyal like no other.”</div></div>
+      <div><div class="photo" role="button" tabindex="0" aria-label="Buka pesan foto 6" onclick="openPhotoMessage(5)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPhotoMessage(5)}"><img src="foto6.jpg" alt="Foto 6"></div><div class="caption">“Simply the prettiest girl.”</div></div>
     </div>
   </section>
 
@@ -409,6 +435,16 @@ footer{text-align:center;opacity:.55;font-size:12px;padding:20px}
   <footer>Made with too much effort & a little bit of nostalgia. ✨</footer>
 </main>
 
+<div class="message-modal" id="photoMessageModal" onclick="closePhotoMessage()" role="dialog" aria-modal="true" aria-labelledby="photoMessageTitle">
+  <div class="message-card" onclick="event.stopPropagation()">
+    <button class="message-close" type="button" onclick="closePhotoMessage()" aria-label="Tutup pesan">×</button>
+    <img class="message-photo" id="photoMessageImage" src="foto1.jpg" alt="Foto kenangan">
+    <div class="message-emoji" id="photoMessageEmoji">💗</div>
+    <h3 id="photoMessageTitle">A little note for you</h3>
+    <p id="photoMessageText"></p>
+  </div>
+</div>
+
 <div class="modal" id="modal" onclick="closePhoto()">
   <div class="modal-box" onclick="event.stopPropagation()">
     <button class="close" onclick="closePhoto()">×</button>
@@ -464,6 +500,33 @@ function toggleMusic(){
   }
 }
 
+/* Pesan kecil yang muncul saat masing-masing foto ditekan */
+const photoMessages = [
+  { emoji: "🌷", title: "That kind heart of yours", text: "You have this gentle way of making people feel cared for. I hope life gives that same kindness back to you, in ways both big and small." },
+  { emoji: "☁️", title: "Look how far you've come", text: "I admire the way you handle things and continue to grow in your own way. You don’t need to understand everything—what you are doing is already very good." },
+  { emoji: "🧸", title: "A little patience goes a long way", text: "You have a way of staying patient even when things aren’t easy. I honestly think that’s one of the things that makes you special." },
+  { emoji: "🎀", title: "How are you this cute?", text: "Sometimes you probably don't even realize how adorable you are. And honestly, that's part of what makes it even more special." },
+  { emoji: "💌", title: "Someone you can count on", text: "When you care about someone, you are truly sincere. That kind of loyalty is rare, and I hope you know just how special that is." },
+  { emoji: "✨", title: "Pretty, inside and out", text: "Of course you are beautiful, but you are so much more than just that. It’s the little things about you that make you truly special." }
+];
+
+function openPhotoMessage(index){
+  const message = photoMessages[index];
+  if(!message) return;
+  const image = document.getElementById("photoMessageImage");
+  image.src = `foto${index + 1}.jpg`;
+  image.alt = `Foto kenangan ${index + 1}`;
+  image.style.display = "block";
+  image.onerror = () => { image.style.display = "none"; };
+  document.getElementById("photoMessageEmoji").textContent = message.emoji;
+  document.getElementById("photoMessageTitle").textContent = message.title;
+  document.getElementById("photoMessageText").textContent = message.text;
+  document.getElementById("photoMessageModal").classList.add("show");
+}
+function closePhotoMessage(){
+  document.getElementById("photoMessageModal").classList.remove("show");
+}
+
 /* Foto fullscreen */
 function openPhoto(src){
   document.getElementById("modalImg").src=src;
@@ -511,7 +574,9 @@ document.querySelector(".cake").addEventListener("keydown", event => {
 });
 
 /* Escape untuk modal */
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closePhoto()});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){closePhoto();closePhotoMessage();}
+});
 </script>
 </body>
 </html>
